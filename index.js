@@ -1,15 +1,18 @@
 const express = require('express'); // importar o modulo do express
 const app = express(); // armazenar o express dentro da variavel app
 const bodyParser = require('body-parser'); 
-const connection = require('./DataBase/dataBase.js');
+const connection = require('./DataBase/dataBase')
 
 connection
-    .authenticate()
-    .then(()=>{
-        console.log('Conectado ao banco')
-    }).catch((msgError) => {
-        console.error(msgError)
-    })
+.authenticate()
+.then(()=>{
+    console.log('Conexao com o banco feita com sucesso!')
+})
+.catch((msgErro) =>{
+    console.log(msgErro)
+})
+
+
 
 
 app.set('view engine','ejs'); //informa ao express para fazer uso so EJS como view engine
