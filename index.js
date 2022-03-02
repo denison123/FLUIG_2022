@@ -2,9 +2,7 @@ const express = require('express'); // importar o modulo do express
 const app = express(); // armazenar o express dentro da variavel app
 const bodyParser = require('body-parser'); 
 const connection = require('./DataBase/dataBase')
-const PerguntaModel = require('./DataBase/Pergunta') // importando o medel pergunta
-
-
+const Pergunta = require('./DataBase/Pergunta') // importando o medel pergunta
 
 // validação de conexao com banco de dados
 // connection
@@ -23,7 +21,12 @@ app.use(bodyParser.json());
 
 //rotas
 app.get('/', (req, res)=>{
-    res.render('index')
+    Pergunta.findAll({raw:true}).then(perguntas =>{     // select * from perguntas
+        res.render('index',{
+            perguntas:perguntas
+        })
+    }) 
+    
 });
 app.get('/perguntar', (req, res)=>{
     res.render('perguntar')
@@ -32,7 +35,12 @@ app.get('/perguntar', (req, res)=>{
 app.post('/salvarpergunta', (req, res)=>{
     var titulo = req.body.titulo
     var descricao = req.body.descricao
-    res.send('Formlario recebido' + ' ' + titulo + ' ' + descricao)
+    Pergunta.create({        // inserindo dados no banco de dados
+        titulo: titulo,
+        descricao: descricao
+    }).then(()=>{
+        res.redirect('/')
+    })
 })
 
 // inicialização do servidor

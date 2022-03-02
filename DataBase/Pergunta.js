@@ -19,3 +19,6 @@ const Pergunta = connection.define('perguntas',{
 // }).catch((msgErro) =>{
 //     console.log(msgErro)
 // })
+
+
+module.exports =Pergunta;
