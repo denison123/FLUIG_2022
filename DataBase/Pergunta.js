@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize'); // importação do sequelize
-const connection = require('./dataBase'); // importando banco de dados
+const connection = require('./dataBaseSql'); // importando banco de dados
 
 // definição de model
 const Pergunta = connection.define('perguntas',{
@@ -14,11 +14,11 @@ const Pergunta = connection.define('perguntas',{
 })
 
 // força a sincronização no bando de dados, caso nao estenha ele cria, se cado exista ela nao cria
-// Pergunta.sync({force:false}).then(()=>{
-//     console.log('Tabela alimentada com sucesso')
-// }).catch((msgErro) =>{
-//     console.log(msgErro)
-// })
+Pergunta.sync({force:false}).then(()=>{
+    console.log('Tabela alimentada com sucesso')
+}).catch((msgErro) =>{
+    console.log(msgErro)
+})
 
 
 module.exports =Pergunta;

@@ -1,5 +1,6 @@
-const app = require('./DataBase/dataBaseProt')
-app.user(passport.session())
+const connection = require('./DataBase/dataBaseProt')
+connection
+.authenticate()
 .then(()=>{
     console.log('Conexao com o banco feita com sucesso!')
 })
